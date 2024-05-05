@@ -2,44 +2,44 @@ const questions = [
     {
         question: "Which is largest animal in the world?",
         answers: [
-            {text: "Shark", correct: false},
-            {text: "Blue whale", correct: true},
-            {text: "Elephant", correct: false},
-            {text: "Rabbit", correct: false},
+            {text: "Shark", isCorrect: false},
+            {text: "Blue whale", isCorrect: true},
+            {text: "Elephant", isCorrect: false},
+            {text: "Rabbit", isCorrect: false},
         ]
     },
     {
         question: "Which country is the smallest?",
         answers: [
-            {text: "Vatican", correct: true},
-            {text: "Poland", correct: false},
-            {text: "Italy", correct: false},
-            {text: "France", correct: false},
+            {text: "Vatican", isCorrect: true},
+            {text: "Poland", isCorrect: false},
+            {text: "Italy", isCorrect: false},
+            {text: "France", isCorrect: false},
         ]
     },
     {
         question: "Which is largest continent in the world?",
         answers: [
-            {text: "Asia", correct: true},
-            {text: "Africa", correct: false},
-            {text: "Australia", correct: false},
-            {text: "Europe", correct: false},
+            {text: "Asia", isCorrect: true},
+            {text: "Africa", isCorrect: false},
+            {text: "Australia", isCorrect: false},
+            {text: "Europe", isCorrect: false},
             ]
     },
     {
         question: "Do I love my handsome boy",
         answers: [
-            {text: "Yes", correct: true},
-            {text: "No", correct: false},
+            {text: "Yes", isCorrect: true},
+            {text: "No", isCorrect: false},
         ]
     },
     {
         question: "Which is the longest river in the world?",
         answers: [
-            {text: "Congo", correct: false},
-            {text: "Yellow", correct: false},
-            {text: "Nile", correct: true},
-            {text: "Niger", correct: false},
+            {text: "Congo", isCorrect: false},
+            {text: "Yellow", isCorrect: false},
+            {text: "Nile", isCorrect: true},
+            {text: "Niger", isCorrect: false},
             ]
     }
 ];
@@ -69,7 +69,7 @@ function showQuestion(){
         button.classList.add("btn");
         answerButtons.appendChild(button);
 
-        button.dataset.correct = answer.correct;
+        button.dataset.isCorrect = answer.isCorrect;
 
         button.addEventListener("click", selectAnswer);
     });
@@ -84,7 +84,7 @@ function resetState() {
 
 function selectAnswer(e){
     const selectedBtn = e.target;
-    const isCorrect = selectedBtn.dataset.correct === "true";
+    const isCorrect = selectedBtn.dataset.isCorrect === "true";
     if(isCorrect){
         selectedBtn.classList.add("correct");
         score++;
@@ -92,7 +92,7 @@ function selectAnswer(e){
         selectedBtn.classList.add("incorrect");
     }
     Array.from(answerButtons.children).forEach(button => {
-        if(button.dataset.correct === "true"){
+        if(button.dataset.isCorrect === "true"){
             button.classList.add("correct");
         }
         button.disabled = true;
