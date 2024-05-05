@@ -1,6 +1,6 @@
 const questions = [
     {
-        question: "Which is largest animal in the world?",
+        text: "Which is largest animal in the world?",
         answers: [
             {text: "Shark", isCorrect: false},
             {text: "Blue whale", isCorrect: true},
@@ -9,7 +9,7 @@ const questions = [
         ]
     },
     {
-        question: "Which country is the smallest?",
+        text: "Which country is the smallest?",
         answers: [
             {text: "Vatican", isCorrect: true},
             {text: "Poland", isCorrect: false},
@@ -18,7 +18,7 @@ const questions = [
         ]
     },
     {
-        question: "Which is largest continent in the world?",
+        text: "Which is largest continent in the world?",
         answers: [
             {text: "Asia", isCorrect: true},
             {text: "Africa", isCorrect: false},
@@ -27,14 +27,14 @@ const questions = [
             ]
     },
     {
-        question: "Do I love my handsome boy",
+        text: "Do I love my handsome boy",
         answers: [
             {text: "Yes", isCorrect: true},
             {text: "No", isCorrect: false},
         ]
     },
     {
-        question: "Which is the longest river in the world?",
+        text: "Which is the longest river in the world?",
         answers: [
             {text: "Congo", isCorrect: false},
             {text: "Yellow", isCorrect: false},
@@ -61,7 +61,7 @@ function showQuestion(){
     resetState();
     let currentQuestion = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.text;
 
     currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
