@@ -64,14 +64,14 @@ function showQuestion(){
     questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
 
     currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button"); // <button></button>
-        button.innerHTML = answer.text; // <button>{answer.text}</button>, np. <button>Shark</button>
-        button.classList.add("btn"); // <button class="btn">{answer.text}</button>, np. <button class="btn">Shark</button>
+        const button = document.createElement("button");
+        button.innerHTML = answer.text;
+        button.classList.add("btn");
         answerButtons.appendChild(button);
 
-        button.dataset.correct = answer.correct;  // <button class="btn" data-correct="true">{answer.text}</button>, np. <button class="btn" data-correct="true">Shark</button>
+        button.dataset.correct = answer.correct;
 
-        button.addEventListener("click", selectAnswer); // <button class="btn" data-correct="true" onclick="selectAnswer">{answer.text}</button>, np. <button class="btn" data-correct="true" onclick="selectAnswer">Shark</button>
+        button.addEventListener("click", selectAnswer);
     });
 }
 
