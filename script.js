@@ -71,7 +71,7 @@ function showQuestion(){
 
         button.dataset.isCorrect = answer.isCorrect;
 
-        button.addEventListener("click", selectAnswer);
+        button.addEventListener("click", handleOnClickAnswer);
     });
 }
 
@@ -82,7 +82,7 @@ function resetState() {
     }
 }
 
-function selectAnswer(e){
+function handleOnClickAnswer(e){
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.isCorrect === "true";
     if(isCorrect){
