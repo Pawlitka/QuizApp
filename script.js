@@ -1,4 +1,4 @@
-const questions = [
+const QUESTIONS = [
     {
         text: "Which is largest animal in the world?",
         answers: [
@@ -43,9 +43,9 @@ const questions = [
             ]
     }
 ];
-const questionElement = document.getElementById("question");
-const answerButtons = document.getElementById("answer-buttons");
-const NextButton = document.getElementById("next-btn");
+const QUESTION_ELEMENT = document.getElementById("question");
+const ANSWER_BUTTON = document.getElementById("answer-buttons");
+const NEXT_BUTTON = document.getElementById("next-btn");
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -53,21 +53,21 @@ let score = 0;
 function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
-    NextButton.innerHTML = "Next";
+    NEXT_BUTTON.innerHTML = "Next";
     showQuestion();
 }
 
 function showQuestion(){
     resetState();
-    let currentQuestion = questions[currentQuestionIndex];
+    let currentQuestion = QUESTIONS[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo + ". " + currentQuestion.text;
+    QUESTION_ELEMENT.innerHTML = questionNo + ". " + currentQuestion.text;
 
     currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
         button.innerHTML = answer.text;
         button.classList.add("btn");
-        answerButtons.appendChild(button);
+        ANSWER_BUTTON.appendChild(button);
 
         button.dataset.isCorrect = answer.isCorrect;
 
@@ -76,9 +76,9 @@ function showQuestion(){
 }
 
 function resetState() {
-    NextButton.style.display = "none";
-    while(answerButtons.firstChild){
-        answerButtons.removeChild(answerButtons.firstChild);
+    NEXT_BUTTON.style.display = "none";
+    while(ANSWER_BUTTON.firstChild){
+        ANSWER_BUTTON.removeChild(ANSWER_BUTTON.firstChild);
     }
 }
 
@@ -91,20 +91,20 @@ function selectAnswer(e){
     }else{
         selectedBtn.classList.add("incorrect");
     }
-    Array.from(answerButtons.children).forEach(button => {
+    Array.from(ANSWER_BUTTON.children).forEach(button => {
         if(button.dataset.isCorrect === "true"){
             button.classList.add("correct");
         }
         button.disabled = true;
     });
-    NextButton.style.display = "block";
+    NEXT_BUTTON.style.display = "block";
 }
 
 function showScore(){
     resetState();
-    questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
-    NextButton.innerHTML = "PLAY AGAIN";
-    NextButton.style.display = "block";
+    QUESTION_ELEMENT.innerHTML = `You scored ${score} out of ${QUESTIONS.length}!`;
+    NEXT_BUTTON.innerHTML = "PLAY AGAIN";
+    NEXT_BUTTON.style.display = "block";
 }
 
 
@@ -113,7 +113,7 @@ function showScore(){
 
 function handleNextButton(){
     currentQuestionIndex++;
-    if(currentQuestionIndex < questions.length){
+    if(currentQuestionIndex < QUESTIONS.length){
         showQuestion();
     }else{
         showScore();
@@ -121,8 +121,8 @@ function handleNextButton(){
 }
 
 
-NextButton.addEventListener("click", ()=>{
-    if(currentQuestionIndex < questions.length){
+NEXT_BUTTON.addEventListener("click", ()=>{
+    if(currentQuestionIndex < QUESTIONS.length){
         handleNextButton();
     }else{
         startQuiz();
