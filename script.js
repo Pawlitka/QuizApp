@@ -46,6 +46,9 @@ const QUESTIONS = [
 const QUESTION_ELEMENT = document.getElementById("question");
 const ANSWER_BUTTON = document.getElementById("answer-buttons");
 const NEXT_BUTTON = document.getElementById("next-btn");
+const CORRECT_ANSWER_CLASS = "correct";
+const INCORRECT_ANSWER_CLASS = "incorrect";
+
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -85,12 +88,14 @@ function resetState() {
 function handleOnClickAnswer(e){
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.isCorrect === "true";
-    if(isCorrect){
-        selectedBtn.classList.add("correct");
+
+    const extraAnswerClass = isCorrect ? CORRECT_ANSWER_CLASS : INCORRECT_ANSWER_CLASS;
+    selectedBtn.classList.add(extraAnswerClass);
+
+    if(isCorrect) {
         score++;
-    }else{
-        selectedBtn.classList.add("incorrect");
     }
+
     Array.from(ANSWER_BUTTON.children).forEach(button => {
         if(button.dataset.isCorrect === "true"){
             button.classList.add("correct");
