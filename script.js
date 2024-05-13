@@ -88,8 +88,12 @@ function createAnswerElement(answer) {
 
 function resetState() {
     NEXT_BUTTON_ELEMENT.style.display = "none";
-    while(ANSWER_BUTTONS_CONTAINER_ELEMENT.firstChild){
-        ANSWER_BUTTONS_CONTAINER_ELEMENT.removeChild(ANSWER_BUTTONS_CONTAINER_ELEMENT.firstChild);
+    removeAllChildrenOf(ANSWER_BUTTONS_CONTAINER_ELEMENT);
+}
+
+function removeAllChildrenOf(element) {
+    while(element.firstChild) {
+        element.removeChild(element.firstChild);
     }
 }
 
