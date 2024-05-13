@@ -98,11 +98,11 @@ function removeAllChildrenOf(element) {
 }
 
 function handleOnClickAnswer(e){
-    const selectedBtn = e.target;
-    const isCorrect = selectedBtn.dataset.isCorrect === "true";
+    const selectedButtonElement = e.target;
+    const isCorrect = selectedButtonElement.dataset.isCorrect === "true";
 
     const extraAnswerClass = isCorrect ? CORRECT_ANSWER_CLASS : INCORRECT_ANSWER_CLASS;
-    selectedBtn.classList.add(extraAnswerClass);
+    selectedButtonElement.classList.add(extraAnswerClass);
 
     if(isCorrect) {
         score++;
