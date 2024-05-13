@@ -8,9 +8,11 @@
     padding: 0;
     font-family: 'Georgia', serif;
 }
-body{
+
+body {
     background: var(--main-color);
 }
+
 .app{
     background: #EECFCC;
     width: 90%;
@@ -19,6 +21,7 @@ body{
     border-radius: 40px;
     padding: 30px;
 }
+
 .app h1{
     font-size: 25px;
     color: var(--main-color);
@@ -27,15 +30,18 @@ body{
     padding-bottom: 30px;
     text-align: center;
 }
+
 .quiz{
     padding: 20px 0;
 }
+
 .quiz h2{
     font-size: 24px;
     color: var(--main-color);
     font-weight: 600;
     text-align: center;
 }
+
 .btn{
     background: var(--main-color);
     color: var(--white-color);
@@ -49,13 +55,16 @@ body{
     cursor: pointer;
     transition: all 0.3s;
 }
+
 .btn:hover:not([disabled]){
     background: var(--white-color);
     color: var(--main-color);
 }
+
 .btn:disabled{
     cursor: no-drop;
 }
+
 #next-btn{
     background: var(--main-color);
     color: var(--white-color);
@@ -69,13 +78,16 @@ body{
     display: none;
     transition: 0.5s;
 }
+
 #next-btn:hover{
     background: var(--white-color);
     color: var(--main-color);
 }
+
 .correct{
     background: #3E764B;
 }
-.incorrect{
+
+.incorrect {
     background: #800020;
 }

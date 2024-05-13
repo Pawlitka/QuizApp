@@ -44,8 +44,8 @@ const QUESTIONS = [
     }
 ];
 const QUESTION_ELEMENT = document.getElementById("question");
-const ANSWER_BUTTON = document.getElementById("answer-buttons");
-const NEXT_BUTTON = document.getElementById("next-btn");
+const ANSWER_BUTTON_ELEMENT = document.getElementById("answer-buttons");
+const NEXT_BUTTON_ELEMENT = document.getElementById("next-btn");
 const CORRECT_ANSWER_CLASS = "correct";
 const INCORRECT_ANSWER_CLASS = "incorrect";
 
@@ -56,7 +56,7 @@ let score = 0;
 function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
-    NEXT_BUTTON.innerHTML = "Next";
+    NEXT_BUTTON_ELEMENT.innerHTML = "Next";
     showQuestion();
 }
 
@@ -70,7 +70,7 @@ function showQuestion(){
         const button = document.createElement("button");
         button.innerHTML = answer.text;
         button.classList.add("btn");
-        ANSWER_BUTTON.appendChild(button);
+        ANSWER_BUTTON_ELEMENT.appendChild(button);
 
         button.dataset.isCorrect = answer.isCorrect;
 
@@ -79,9 +79,9 @@ function showQuestion(){
 }
 
 function resetState() {
-    NEXT_BUTTON.style.display = "none";
-    while(ANSWER_BUTTON.firstChild){
-        ANSWER_BUTTON.removeChild(ANSWER_BUTTON.firstChild);
+    NEXT_BUTTON_ELEMENT.style.display = "none";
+    while(ANSWER_BUTTON_ELEMENT.firstChild){
+        ANSWER_BUTTON_ELEMENT.removeChild(ANSWER_BUTTON_ELEMENT.firstChild);
     }
 }
 
@@ -96,20 +96,20 @@ function handleOnClickAnswer(e){
         score++;
     }
 
-    Array.from(ANSWER_BUTTON.children).forEach(button => {
+    Array.from(ANSWER_BUTTON_ELEMENT.children).forEach(button => {
         if(button.dataset.isCorrect === "true"){
             button.classList.add("correct");
         }
         button.disabled = true;
     });
-    NEXT_BUTTON.style.display = "block";
+    NEXT_BUTTON_ELEMENT.style.display = "block";
 }
 
 function showScore(){
     resetState();
     QUESTION_ELEMENT.innerHTML = `You scored ${score} out of ${QUESTIONS.length}!`;
-    NEXT_BUTTON.innerHTML = "PLAY AGAIN";
-    NEXT_BUTTON.style.display = "block";
+    NEXT_BUTTON_ELEMENT.innerHTML = "PLAY AGAIN";
+    NEXT_BUTTON_ELEMENT.style.display = "block";
 }
 
 
@@ -126,7 +126,7 @@ function handleNextButton(){
 }
 
 
-NEXT_BUTTON.addEventListener("click", ()=>{
+NEXT_BUTTON_ELEMENT.addEventListener("click", ()=>{
     if(currentQuestionIndex < QUESTIONS.length){
         handleNextButton();
     }else{
