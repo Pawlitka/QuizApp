@@ -96,12 +96,29 @@ function handleOnClickAnswer(e){
         score++;
     }
 
-    Array.from(ANSWER_BUTTON_ELEMENT.children).forEach(button => {
-        if(button.dataset.isCorrect === "true"){
-            button.classList.add("correct");
-        }
-        button.disabled = true;
+    const answerButtons = Array.from(ANSWER_BUTTON_ELEMENT.children);
+    prepareButtonsAfterAnswer(answerButtons);
+}
+
+function prepareButtonsAfterAnswer(buttons) {
+    buttons.forEach(button => {
+        markIfCorrectAnswer(button);
+        disableButton(button);
     });
+    showNextButtonElement();
+}
+
+function markIfCorrectAnswer(button) {
+    if(button.dataset.isCorrect === "true") {
+        button.classList.add("correct");
+    }
+}
+
+function disableButton(button) {
+    button.disabled = true;
+}
+
+function showNextButtonElement() {
     NEXT_BUTTON_ELEMENT.style.display = "block";
 }
 
@@ -109,18 +126,14 @@ function showScore(){
     resetState();
     QUESTION_ELEMENT.innerHTML = `You scored ${score} out of ${QUESTIONS.length}!`;
     NEXT_BUTTON_ELEMENT.innerHTML = "PLAY AGAIN";
-    NEXT_BUTTON_ELEMENT.style.display = "block";
+    showNextButtonElement();
 }
-
-
-
-
 
 function handleNextButton(){
     currentQuestionIndex++;
-    if(currentQuestionIndex < QUESTIONS.length){
+    if(currentQuestionIndex < QUESTIONS.length) {
         showQuestion();
-    }else{
+    } else {
         showScore();
     }
 }
