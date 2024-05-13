@@ -44,10 +44,12 @@ const QUESTIONS = [
     }
 ];
 const QUESTION_ELEMENT = document.getElementById("question");
-const ANSWER_BUTTON_ELEMENT = document.getElementById("answer-buttons");
+const ANSWER_BUTTONS_CONTAINER_ELEMENT = document.getElementById("answer-buttons");
 const NEXT_BUTTON_ELEMENT = document.getElementById("next-btn");
 const CORRECT_ANSWER_CLASS = "correct";
 const INCORRECT_ANSWER_CLASS = "incorrect";
+const ANSWER_HTML_TAG_NAME = "button";
+const ANSWER_CLASSES = "btn";
 
 
 let currentQuestionIndex = 0;
@@ -66,22 +68,28 @@ function showQuestion(){
     let questionNo = currentQuestionIndex + 1;
     QUESTION_ELEMENT.innerHTML = questionNo + ". " + currentQuestion.text;
 
-    currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerHTML = answer.text;
-        button.classList.add("btn");
-        ANSWER_BUTTON_ELEMENT.appendChild(button);
+    currentQuestion.answers.forEach(answer => prepareAnswer(answer));
+}
 
-        button.dataset.isCorrect = answer.isCorrect;
+function prepareAnswer(answer) {
+    const answerElement = createAnswerElement(answer);
+    ANSWER_BUTTONS_CONTAINER_ELEMENT.appendChild(answerElement);
+}
 
-        button.addEventListener("click", handleOnClickAnswer);
-    });
+function createAnswerElement(answer) {
+    const answerElement = document.createElement(ANSWER_HTML_TAG_NAME);
+    answerElement.innerHTML = answer.text;
+    answerElement.classList.add(ANSWER_CLASSES);
+    answerElement.dataset.isCorrect = answer.isCorrect;
+    answerElement.addEventListener("click", handleOnClickAnswer);
+
+    return answerElement;
 }
 
 function resetState() {
     NEXT_BUTTON_ELEMENT.style.display = "none";
-    while(ANSWER_BUTTON_ELEMENT.firstChild){
-        ANSWER_BUTTON_ELEMENT.removeChild(ANSWER_BUTTON_ELEMENT.firstChild);
+    while(ANSWER_BUTTONS_CONTAINER_ELEMENT.firstChild){
+        ANSWER_BUTTONS_CONTAINER_ELEMENT.removeChild(ANSWER_BUTTONS_CONTAINER_ELEMENT.firstChild);
     }
 }
 
@@ -96,7 +104,7 @@ function handleOnClickAnswer(e){
         score++;
     }
 
-    const answerButtons = Array.from(ANSWER_BUTTON_ELEMENT.children);
+    const answerButtons = Array.from(ANSWER_BUTTONS_CONTAINER_ELEMENT.children);
     prepareButtonsAfterAnswer(answerButtons);
 }
 
