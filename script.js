@@ -43,6 +43,7 @@ const QUESTIONS = [
             ]
     }
 ];
+
 const QUESTION_ELEMENT = document.getElementById("question");
 const ANSWER_BUTTONS_CONTAINER_ELEMENT = document.getElementById("answer-buttons");
 const NEXT_BUTTON_ELEMENT = document.getElementById("next-btn");
@@ -50,7 +51,6 @@ const CORRECT_ANSWER_CLASS = "correct";
 const INCORRECT_ANSWER_CLASS = "incorrect";
 const ANSWER_HTML_TAG_NAME = "button";
 const ANSWER_CLASSES = "btn";
-
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -63,13 +63,29 @@ function startQuiz(){
 }
 
 function showQuestion(){
-    resetState();
     let currentQuestion = QUESTIONS[currentQuestionIndex];
-    let questionNo = currentQuestionIndex + 1;
-    QUESTION_ELEMENT.innerHTML = questionNo + ". " + currentQuestion.text;
 
-    currentQuestion.answers.forEach(answer => prepareAnswer(answer));
+    resetState();
+    setQuestionElementMessageForQuestion(currentQuestion);
+    prepareAnswersOf(currentQuestion);
 }
+
+function setQuestionElementMessageForQuestion(question) {
+    let questionNo = currentQuestionIndex + 1;
+    setQuestionElementMessage(questionNo + ". " + question.text);
+}
+
+function prepareAnswersOf(question) {
+    question.answers.forEach(answer => prepareAnswer(answer));
+}
+// function showQuestion(){
+//     resetState();
+//     let currentQuestion = QUESTIONS[currentQuestionIndex];
+//     let questionNo = currentQuestionIndex + 1;
+//     QUESTION_ELEMENT.innerHTML = questionNo + ". " + currentQuestion.text;
+//
+//     currentQuestion.answers.forEach(answer => prepareAnswer(answer));
+// }
 
 function prepareAnswer(answer) {
     const answerElement = createAnswerElement(answer);
@@ -134,11 +150,37 @@ function showNextButtonElement() {
     NEXT_BUTTON_ELEMENT.style.display = "block";
 }
 
+const LABEL_TAGS = {
+    score: '{!score}',
+    maxScore: '{!maxScore}'
+}
+
+const LABELS = {
+    finalScoreMessage: `You scored ${LABEL_TAGS.score} out of ${LABEL_TAGS.maxScore} score!`,
+    playAgain: "PLAY AGAIN"
+};
+
+
 function showScore(){
     resetState();
-    QUESTION_ELEMENT.innerHTML = `You scored ${score} out of ${QUESTIONS.length}!`;
-    NEXT_BUTTON_ELEMENT.innerHTML = "PLAY AGAIN";
+
+    setQuestionElementMessage(getFinalScoreMessage());
+    setNextButtonElementMessage(LABELS.playAgain);
     showNextButtonElement();
+}
+
+function getFinalScoreMessage() {
+    return LABELS.finalScoreMessage
+        .replaceAll(LABEL_TAGS.score, score)
+        .replaceAll(LABEL_TAGS.maxScore, QUESTIONS.length);
+}
+
+function setQuestionElementMessage(message) {
+    QUESTION_ELEMENT.innerHTML = message;
+}
+
+function setNextButtonElementMessage(message) {
+    NEXT_BUTTON_ELEMENT.innerHTML = message;
 }
 
 function handleNextButton(){
