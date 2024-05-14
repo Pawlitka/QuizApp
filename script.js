@@ -78,14 +78,6 @@ function setQuestionElementMessageForQuestion(question) {
 function prepareAnswersOf(question) {
     question.answers.forEach(answer => prepareAnswer(answer));
 }
-// function showQuestion(){
-//     resetState();
-//     let currentQuestion = QUESTIONS[currentQuestionIndex];
-//     let questionNo = currentQuestionIndex + 1;
-//     QUESTION_ELEMENT.innerHTML = questionNo + ". " + currentQuestion.text;
-//
-//     currentQuestion.answers.forEach(answer => prepareAnswer(answer));
-// }
 
 function prepareAnswer(answer) {
     const answerElement = createAnswerElement(answer);
@@ -194,9 +186,9 @@ function handleNextButton(){
 
 
 NEXT_BUTTON_ELEMENT.addEventListener("click", ()=>{
-    if(currentQuestionIndex < QUESTIONS.length){
+    if(currentQuestionIndex < QUESTIONS.length) {
         handleNextButton();
-    }else{
+    }else {
         startQuiz();
     }
 })
