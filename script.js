@@ -105,19 +105,32 @@ function removeAllChildrenOf(element) {
     }
 }
 
-function handleOnClickAnswer(e){
+function handleOnClickAnswer(e) {
     const selectedButtonElement = e.target;
-    const isCorrect = selectedButtonElement.dataset.isCorrect === "true";
+    const answerButtons = Array.from(ANSWER_BUTTONS_CONTAINER_ELEMENT.children);
 
-    const extraAnswerClass = isCorrect ? CORRECT_ANSWER_CLASS : INCORRECT_ANSWER_CLASS;
-    selectedButtonElement.classList.add(extraAnswerClass);
+    processSelectedButtonElement(selectedButtonElement);
+    prepareButtonsAfterAnswer(answerButtons);
+}
 
-    if(isCorrect) {
+function processSelectedButtonElement(buttonElement) {
+    applyAnswerClass(buttonElement);
+    updateScore(buttonElement);
+}
+
+function applyAnswerClass(buttonElement) {
+    const extraAnswerClass = isButtonElementCorrect(buttonElement) ? CORRECT_ANSWER_CLASS : INCORRECT_ANSWER_CLASS;
+    buttonElement.classList.add(extraAnswerClass);
+}
+
+function updateScore(buttonElement) {
+    if (isButtonElementCorrect(buttonElement)) {
         score++;
     }
+}
 
-    const answerButtons = Array.from(ANSWER_BUTTONS_CONTAINER_ELEMENT.children);
-    prepareButtonsAfterAnswer(answerButtons);
+function isButtonElementCorrect(buttonElement) {
+    return buttonElement.dataset.isCorrect === "true";
 }
 
 function prepareButtonsAfterAnswer(buttons) {
@@ -164,7 +177,7 @@ function showScore(){
 function getFinalScoreMessage() {
     return LABELS.finalScoreMessage
         .replaceAll(LABEL_TAGS.score, score)
-        .replaceAll(LABEL_TAGS.maxScore, QUESTIONS.length);
+        .replaceAll(LABEL_TAGS.maxScore, QUESTIONS.length.toString());
 }
 
 function setQuestionElementMessage(message) {
