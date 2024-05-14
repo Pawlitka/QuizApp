@@ -43,6 +43,16 @@ const QUESTIONS = [
             ]
     }
 ];
+const LABEL_TAGS = {
+    score: '{!score}',
+    maxScore: '{!maxScore}'
+}
+
+const LABELS = {
+    finalScoreMessage: `You scored ${LABEL_TAGS.score} out of ${LABEL_TAGS.maxScore} score!`,
+    playAgain: "PLAY AGAIN",
+    next: "Next"
+};
 
 const QUESTION_ELEMENT = document.getElementById("question");
 const ANSWER_BUTTONS_CONTAINER_ELEMENT = document.getElementById("answer-buttons");
@@ -58,7 +68,7 @@ let score = 0;
 function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
-    NEXT_BUTTON_ELEMENT.innerHTML = "Next";
+    setNextButtonElementMessage(LABELS.next);
     showQuestion();
 }
 
@@ -154,17 +164,6 @@ function disableButton(button) {
 function showNextButtonElement() {
     NEXT_BUTTON_ELEMENT.style.display = "block";
 }
-
-const LABEL_TAGS = {
-    score: '{!score}',
-    maxScore: '{!maxScore}'
-}
-
-const LABELS = {
-    finalScoreMessage: `You scored ${LABEL_TAGS.score} out of ${LABEL_TAGS.maxScore} score!`,
-    playAgain: "PLAY AGAIN"
-};
-
 
 function showScore(){
     resetState();
