@@ -26,13 +26,13 @@ const QUESTIONS = [
             {text: "Europe", isCorrect: false},
             ]
     },
-    {
-        text: "Do I love my handsome boy",
-        answers: [
-            {text: "Yes", isCorrect: true},
-            {text: "No", isCorrect: false},
-        ]
-    },
+    // {
+    //     text: "Do I love my handsome boy",
+    //     answers: [
+    //         {text: "Yes", isCorrect: true},
+    //         {text: "No", isCorrect: false},
+    //     ]
+    // },
     {
         text: "Which is the longest river in the world?",
         answers: [
